@@ -40,10 +40,18 @@ public class ViewColorChanger extends Thread {
         }
     }
 
+    /**
+     * Checks current thread state
+     * @return boolean
+     */
     public boolean isShouldStop() {
         return mShouldStop;
     }
 
+    /**
+     * Notifies current thread to stop
+     * @param shouldStop boolean
+     */
     public void setShouldStop(boolean shouldStop) {
         this.mShouldStop = shouldStop;
     }

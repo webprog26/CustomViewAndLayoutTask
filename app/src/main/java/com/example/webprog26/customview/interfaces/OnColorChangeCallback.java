@@ -6,5 +6,9 @@ package com.example.webprog26.customview.interfaces;
 
 public interface OnColorChangeCallback {
 
+    /**
+     * Changes background color of {@link com.example.webprog26.customview.views.CustomView}
+     * @param color int
+     */
     void onColorChange(int color);
 }

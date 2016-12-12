@@ -8,5 +8,13 @@ import android.graphics.Path;
 
 public interface GraphicPathMaker {
 
-    public Path getPath(String shapeType, int shapeWidth, int shapeHeight);
+    /**
+     * Returns new {@link Path} instance with received parameters
+     * @param shapeType {@link String}
+     * @param shapeWidth int
+     * @param shapeHeight int
+     * @return Path
+     * @throws Exception
+     */
+    public Path getPath(String shapeType, int shapeWidth, int shapeHeight) throws Exception;
 }

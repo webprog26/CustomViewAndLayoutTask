@@ -31,6 +31,7 @@ public abstract class CustomView extends View implements OnColorChangeCallback{
     private Paint mPaint;
     private ViewColorChanger mViewColorChanger;
 
+    @SuppressWarnings("deprecation")
     public CustomView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.mPaint = initPaint();
@@ -39,12 +40,29 @@ public abstract class CustomView extends View implements OnColorChangeCallback{
         initAttrs(attrs);
     }
 
+    /**
+     * Inits {@link CustomView} with XML-parameters
+     * @param attrs {@link AttributeSet}
+     */
     protected abstract void initAttrs(AttributeSet attrs);
 
+    /**
+     * Creates new {@link Paint} instance
+     * @return Paint
+     */
     protected abstract Paint initPaint();
 
+    /**
+     * Creates new {@link ViewColorChanger} which is actually a new {@link Thread}
+     * that gives {@link CustomView} new random background color via existing interval in seconds
+     * @return ViewColorChanger
+     */
     protected abstract ViewColorChanger createViewColorChanger();
 
+    /**
+     * Should return one of {@link PathCreator} constants to draw any of possible shapes
+     * @return String
+     */
     protected abstract String setShapeType();
 
     @Override
@@ -68,13 +86,26 @@ public abstract class CustomView extends View implements OnColorChangeCallback{
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         mPaint.setColor(mBackgroundColor);
-        canvas.drawPath(new PathCreator().getPath(setShapeType(), shapeWidth, shapeHeight), mPaint);
+        try{
+            canvas.drawPath(new PathCreator().getPath(setShapeType(), shapeWidth, shapeHeight), mPaint);
+        } catch (Exception e){
+            e.getMessage();
+        }
     }
 
+    /**
+     * Returns current background color of {@link CustomView}
+     * @return int
+     */
     public synchronized int getBackgroundColor() {
         return mBackgroundColor;
     }
 
+    /**
+     * Sets new background color to {@link CustomView} and calls it's parent {@link android.view.ViewGroup}
+     * to redraw this {@link CustomView}
+     * @param backgroundColor int
+     */
     public synchronized void setBackgroundColor(int backgroundColor) {
         this.mBackgroundColor = backgroundColor;
         invalidate();

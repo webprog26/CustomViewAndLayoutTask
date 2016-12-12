@@ -14,16 +14,15 @@ import com.example.webprog26.customview.threads.ViewColorChanger;
  * Created by webprog26 on 12.12.2016.
  */
 
-public class TriangleView extends CustomView {
+public class RectangleView extends CustomView {
 
-    public TriangleView(Context context, AttributeSet attrs) {
+    public RectangleView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     @Override
     protected void initAttrs(AttributeSet attrs) {
         TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.CustomView, 0, 0);
-
         try {
             super.setBackgroundColor(typedArray.getInt(R.styleable.CustomView_backgroundColor, Color.GREEN));
         } finally {
@@ -45,6 +44,6 @@ public class TriangleView extends CustomView {
 
     @Override
     protected String setShapeType() {
-        return PathCreator.TRIANGLE;
+        return PathCreator.RECTANGLE;
     }
 }
